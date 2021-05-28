@@ -2,28 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use App\Models\Visits;
 
 
 class VisitsController extends Controller
 {
-    function get()
+    function lists($id=null)
     {
-        return Visits::all();
-    }
-    function getOne($id)
-    {
-        return Visits::find($id);
+        return $id?Visits::find($id):Visits::all();
     }
 
-    function add(Request $req)
+
+    function adds(Request $req)
     {
         $visit= new Visits;
-        $visit->practitioners_id=$req->practitioners_id;
-        $visit->employees_id=$req->employees_id;
-        $visit->attendedDate=$req->attendedDate;
-        $visit->visitStates_id=$req->visitStates_id;
+        $visit->practitioners_id= $req->practitioners_id;
+        $visit->employees_id= $req->employees_id;
+        $visit->attendedDate= $req->attendedDate;
+        $visit->visitStates_id= $req->visitStates_id;
 
 
         $result=$visit->save();
